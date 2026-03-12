@@ -66,7 +66,8 @@ const { data } = await veilio.detokenize({ token, reason: 'support ticket #42' }
 
 ---
 
-## We are onboarding testers! Join us for free at https://veilio.xyz
+## We are onboarding testers! 
+Join us for free at https://veilio.xyz
 
 ---
 
