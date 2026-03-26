@@ -81,4 +81,5 @@ const { data } = await veilio.detokenize({
 ## We are onboarding testers
 
 Join us for free: [https://veilio.xyz](https://veilio.xyz)
+Docs available here : [https://docs.veilio.xyz](https://docs.veilio.xyz)
 
