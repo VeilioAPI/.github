@@ -1,48 +1,58 @@
 # Veilio
 
-**Make stolen data worthless.**
+## Make stolen data worthless.
 
-API-first data tokenization infrastructure. Replace plain-text sensitive data with secure tokens in your backend—if a database leaks, the data is unusable.
+API-first data tokenization infrastructure.  
+Replace plain-text sensitive data with secure tokens in your backend—if a database leaks, the data is unusable.
 
 ---
 
 ## What we do
 
-Veilio provides a **tokenization API** that sits between your application and your database:
+Veilio provides a tokenization API that sits between your application and your database:
 
-- **Tokenize** before storing: emails, phones, PII → opaque tokens in your DB  
-- **Detokenize** when needed: with audit trail and access control  
-- **Real data** stays in an isolated, encrypted vault—your DB only holds tokens  
+- **Tokenize before storing**: emails, phones, and PII become opaque tokens in your DB
+- **Detokenize when needed**: with access control and audit trail
+- **Keep real data isolated** in an encrypted vault while your application database stores tokens
+- **Integrate fast**: no full schema migration, no full-database rewrite
 
-No schema migration, no full-database rewrite. Integrate in hours, not months.
-
-| | Your database | Attacker gets a copy |
-|--|----------------|----------------------|
-| Without Veilio | `john@company.com` | Exploitable |
-| With Veilio | `tok_x7k2m9...` | Worthless |
+| Your database | Attacker gets a copy |
+| --- | --- |
+| **Without Veilio**: `john@company.com` | **Exploitable** |
+| **With Veilio**: `tok_x7k2m9...` | **Worthless** |
 
 ---
 
 ## For technical teams
 
-- **API-first** — REST API, official SDKs (JavaScript/TypeScript, Python)
-- **Drop-in** — Works with any stack; tokenize in your backend before `INSERT`
-- **Compliance-ready** — Audit logs, access control (RBAC), formats for GDPR/SOC 2/HDS/NIS 2
-- **Zero refactoring** — Keep your schema; store tokens in the same columns
+- **API-first**: REST API + official SDKs (JavaScript/TypeScript, Python)
+- **Drop-in integration**: works with any stack; tokenize in your backend before `INSERT`
+- **Compliance-ready**: audit logs, RBAC, and controls aligned with GDPR / SOC 2 / HDS / NIS 2
+- **Zero-refactor mindset**: keep your schema and store tokens in the same columns
 
-### Quick example
+---
 
-```javascript
+## Quick example
+
+```ts
 import { VeilioClient } from '@veilio/sdk';
 
-const veilio = new VeilioClient({ apiKey: process.env.VEILIO_API_KEY });
+const veilio = new VeilioClient({
+  apiKey: process.env.VEILIO_API_KEY
+});
 
 // Before storing
-const { token } = await veilio.tokenize({ data: user.email, type: 'email' });
+const { token } = await veilio.tokenize({
+  data: user.email,
+  type: 'email'
+});
 await db.users.insert({ email: token });
 
-// When you need the value (e.g. support, export)
-const { data } = await veilio.detokenize({ token, reason: 'support ticket #42' });
+// When needed (support, export, operations)
+const { data } = await veilio.detokenize({
+  token,
+  reason: 'support ticket #42'
+});
 ```
 
 ---
@@ -50,25 +60,25 @@ const { data } = await veilio.detokenize({ token, reason: 'support ticket #42' }
 ## Use cases
 
 | Use case | Status |
-|----------|--------|
-| **Forms** (signup, contact) — tokenize on submit | ✅ Live |
-| **IA / ML** — train on tokens, no PII in models | 🔜 Coming |
-| **CRM & support** — detokenize on demand with audit | 🔜 Coming |
-| **Data sharing** — analytics/partners see tokens only | 🔜 Coming |
+| --- | --- |
+| Profile/account pages: tokenize PII fields on save | ✅ Live |
+| Contact and lead forms: tokenize on submit | ✅ Live |
+| Marketing campaigns and landing pages: protect collected personal data | ✅ Live |
+| Newsletter/emailing databases: controlled detokenization for approved workflows | ✅ Live |
+| Legacy CSV datasets: batch tokenization for historical data | ✅ Live |
+| CRM native read flows with transparent detokenization | 🔜 Phase 2 |
 
 ---
 
-## Who it's for
+## Who it’s for
 
-- **SaaS & AI startups** — Ship fast, protect PII, meet enterprise requirements  
-- **Engineering teams** — API-first, DevOps-friendly; no dedicated security team required  
-- **Technical founders** — Fix security architecture early; compliance (SOC 2, ISO, HDS) on the roadmap  
-
----
-
-## We are onboarding testers! 
-Join us for free at https://veilio.xyz
+- **SaaS & AI startups**: ship fast, protect PII, and meet enterprise requirements
+- **Engineering teams**: API-first, DevOps-friendly; no dedicated security team required to start
+- **Technical founders**: fix data security architecture early and prepare for compliance milestones
 
 ---
 
-*France · Technology, Information and Media*
+## We are onboarding testers
+
+Join us for free: [https://veilio.xyz](https://veilio.xyz)
+
