@@ -4,7 +4,7 @@ Make stolen data worthless.
 
 Veilio replaces plaintext personal data with tokens. The email, phone number, IBAN, or name no longer sits in your database. It sits in an encrypted vault. Your application stores only a token. If the database, the backup, or the export leaks, there is nothing left to resell, nothing left to spam, and nobody left to call.
 
-Site: [veilio.fr](https://veilio.fr) · Docs: [docs.veilio.xyz](https://docs.veilio.xyz)
+Site: [veilio.fr](https://veilio.fr) · Docs: [docs.veilio.fr](https://docs.veilio.fr)
 
 ---
 
